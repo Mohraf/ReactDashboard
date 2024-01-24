@@ -39,7 +39,7 @@ export default function SideBar() {
           </li>
           <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <HomeIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
               <span className="text-sm font-medium">Out of Office</span>
             </a>
           </li>
@@ -123,7 +123,7 @@ export default function SideBar() {
           </li>
           <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <HomeIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
               <span className="text-sm font-medium">Warehouse</span>
             </a>
           </li>
@@ -133,9 +133,121 @@ export default function SideBar() {
               <span className="text-sm font-medium">Corporate Checkins</span>
             </a>
           </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Imports</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Account Opening</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Reports</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Finance Messages</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Marketing</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Chat</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Assets</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Mobile App</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Payments</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Products</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Stockists</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Inventory</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Location Settings</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Employees</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Clients</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">TSAs</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Soil</span>
+            </a>
+          </li>
+          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Tasks</span>
+            </a>
+          </li><li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a className="flex items-center space-x-4" href="#">
+              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium">Messages</span>
+            </a>
+          </li>
         </ul>
-      </aside>
-      
+      </aside>      
     </>
   )
 }
