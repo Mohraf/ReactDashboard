@@ -3,247 +3,248 @@ import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card"
 export default function SideBar() {
   return (
     <>
-      <aside className="w-64 bg-gradient-to-b from-white to-gray-100 dark:from-gray-800 dark:to-gray-700" style={{
+      <aside className="w-64 bg-gradient-to-b from-cyan-950 to-slate-700 dark:from-gray-800 dark:to-gray-700" style={{
         position: "fixed",
         overflowY: "scroll",
         top: 0,
         bottom: 0
       }}>
         <div className="h-16 flex items-center justify-center border-b-2">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">Admin Portal</h2>
+          <h2 className="text-2xl font-semibold text-white dark:text-white">Admin Portal</h2>
         </div>
         <ul>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <TvIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Dashboard</span>
+              <TvIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Dashboard</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <CarIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Vehicles</span>
+              <CarIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Vehicles</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <HomeIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Leave</span>
+              <HomeIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Leave</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <DocumentIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">LPO</span>
+              <DocumentIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">LPO</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <HomeIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Out of Office</span>
+              <HomeIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Out of Office</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Requisition</span>
+              <DocumentIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Requisition</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Corporate Farms</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Corporate Farms</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Ticket</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Ticket</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Product Registration</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Product Registration</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Delivery</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Delivery</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Delivery Map</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Delivery Map</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Product Manufacture</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Product Manufacture</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Greenlife Source</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Greenlife Source</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Promotions</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Promotions</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Product Codes</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Product Codes</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Promo Codes</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Promo Codes</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">TSA Targets</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">TSA Targets</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Checkins</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Checkins</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <HomeIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Warehouse</span>
+              <HomeIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Warehouse</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Corporate Checkins</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Corporate Checkins</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Imports</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Imports</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Account Opening</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Account Opening</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Reports</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Reports</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Finance Messages</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Finance Messages</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Marketing</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Marketing</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Chat</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Chat</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Assets</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Assets</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Mobile App</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Mobile App</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Payments</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Payments</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Products</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Products</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Stockists</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Stockists</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Inventory</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Inventory</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Location Settings</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Location Settings</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Employees</span>
+              <UsersIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Employees</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Clients</span>
+              <UsersIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Clients</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">TSAs</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">TSAs</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Soil</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Soil</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Tasks</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Tasks</span>
             </a>
-          </li><li className="flex items-center p-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+          </li>
+          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-medium">Messages</span>
+              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Messages</span>
             </a>
           </li>
         </ul>
