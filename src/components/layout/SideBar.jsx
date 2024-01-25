@@ -1,4 +1,3 @@
-import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card"
 import { HomeIcon, TvIcon, CarIcon, DocumentIcon, SettingsIcon, ShoppingCartIcon, UsersIcon } from "../icons/icons"
 
 export default function SideBar() {
