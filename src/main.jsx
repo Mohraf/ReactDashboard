@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import * as Sentry from "@sentry/react";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 Sentry.init({
   dsn: "https://b536a95e909e6eccbc6661402f785360@o4506616496128000.ingest.sentry.io/4506625164771328",
@@ -23,9 +24,12 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
 });
 
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>,
 )
