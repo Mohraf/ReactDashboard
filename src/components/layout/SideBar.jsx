@@ -1,4 +1,5 @@
-import { HomeIcon, TvIcon, CarIcon, DocumentIcon, SettingsIcon, ShoppingCartIcon, UsersIcon } from "../icons/icons"
+import { HomeIcon, TvIcon, CarIcon, DocumentIcon, SettingsIcon, ShoppingCartIcon, UsersIcon, FreightContainerIcon, LocationPinIcon, TractorIcon, TicketIcon,
+BottleIcon } from "../icons/icons"
 
 export default function SideBar() {
   return (
@@ -39,7 +40,7 @@ export default function SideBar() {
           </li>
           <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <HomeIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <LocationPinIcon className="h-5 w-5 text-white dark:text-gray-400" />
               <span className="text-sm text-white font-medium">Out of Office</span>
             </a>
           </li>
@@ -51,19 +52,19 @@ export default function SideBar() {
           </li>
           <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <TractorIcon className="h-5 w-5 text-white dark:text-gray-400" />
               <span className="text-sm text-white font-medium">Corporate Farms</span>
             </a>
           </li>
           <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <TicketIcon className="h-5 w-5 text-white dark:text-gray-400" />
               <span className="text-sm text-white font-medium">Ticket</span>
             </a>
           </li>
           <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <BottleIcon className="h-5 w-5 text-white dark:text-gray-400" />
               <span className="text-sm text-white font-medium">Product Registration</span>
             </a>
           </li>
@@ -135,7 +136,7 @@ export default function SideBar() {
           </li>
           <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
-              <SettingsIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <FreightContainerIcon className="h-5 w-5 text-white dark:text-gray-400" />
               <span className="text-sm text-white font-medium">Imports</span>
             </a>
           </li>
