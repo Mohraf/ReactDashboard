@@ -1,6 +1,26 @@
+import { useQuery } from "@tanstack/react-query"
 import AdminDashboard from "../dashboard/AdminDashboard"
 
+
 export default function ContentWrapper() {
+    // const { data: balance, isLoading, error } = useQuery({
+    //     queryFn: () =>
+    //         fetch('http://localhost:8000/mobileapp/dashboard/getMpesaBalance').then(
+    //             (res) => res.json()
+    //         ),
+    //     queryKey: ['balance'],
+    // });
+
+    // // Show Loading message while data is fetching
+    // if (isLoading) {
+    //     return <h2>Loading...</h2>
+    // }
+
+    // // To handle error
+    // if (error) {
+    //     return <div className="error">Error: error fetching</div>
+    // }
+
     return (
         <main className="flex-1 p-6" style={{
             marginLeft: "16rem", // Adjust this value to match the width of your sidebar
@@ -25,7 +45,7 @@ export default function ContentWrapper() {
                     </div>
                     <div>
                         <h5 className="text-1xl font-semibold text-gray-500 dark:text-white">SMS BALANCE</h5>
-                        <h3 className="text-2xl font-semibold text-gray-500 dark:text-white">0</h3>
+                        <h3 className="text-2xl font-semibold text-gray-500 dark:text-white">0 {}</h3>
                     </div>
                 </div>
             </div>

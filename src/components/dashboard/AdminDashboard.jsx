@@ -1,10 +1,39 @@
 import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card"
+import { useQuery } from "@tanstack/react-query"
+
 
 export default function AdminDashboard() {
+    const { data: comments, isLoading, error } = useQuery({
+        queryFn: () =>
+            fetch('https://jsonplaceholder.typicode.com/comments?_limit=10').then(
+                (res) => res.json()
+            ),
+        queryKey: ['comments'],
+    });
+    
+    // Show Loading message while data is fetching
+    if (isLoading) {
+        return <h2>Loading...</h2>
+    }
+    
+    // To handle error
+    if (error) {
+        return <div className="error">Error: error fetching</div>
+    }
     return (
         <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-                <Card className="bg-gradient-to-r from-red-500 to-red-300">
+                {comments.map((comment) => (
+                    <Card className="bg-gradient-to-r from-teal-500 to-teal-300" key={comment.id}>
+                        <CardHeader className="pb-2">
+                            <CardTitle className=" text-gray-300 dark:text-gray-400">{comment.id}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <span className="text-2xl font-bold text-gray-300 dark:text-gray-400">{comment.email}</span>
+                        </CardContent>
+                    </Card>
+                ))}
+                {/* <Card className="bg-gradient-to-r from-red-500 to-red-300">
                     <CardHeader className="pb-2">
                         <CardTitle className=" text-gray-300 dark:text-gray-400">Registered Users</CardTitle>
                     </CardHeader>
@@ -59,7 +88,7 @@ export default function AdminDashboard() {
                     <CardContent>
                         <span className="text-2xl font-bold text-gray-300 dark:text-gray-400">4500</span>
                     </CardContent>
-                </Card>
+                </Card> */}
             </div>
         </>
     )
