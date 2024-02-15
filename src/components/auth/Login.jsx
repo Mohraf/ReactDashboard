@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
 import axios from '@/api/axios';
 import { Button } from '@/components/ui/button';
+import IMAGES from '@/images/images';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ const Login = () => {
         e.preventDefault();
 
         try{
-            await axios.post('/login', {email, password});
+            await axios.post('/api/mobileapp/loginClient', {email, password});
             setEmail("");
             setPassword("");
             navigate("/");
@@ -42,7 +43,8 @@ const Login = () => {
                         md:px-[60px]
                         '
                     >
-                        <div className='mb-10 text-center md:mb-16'>GREENLIFE</div>
+                        <img src={IMAGES.logo} alt="logo" />
+                        <div className='mb-10 text-center md:mb-16'>Your Growth, Our Growth</div>
                         <form onSubmit={handleLogin}>
                             <div className='mb-4'>
                                 <input 

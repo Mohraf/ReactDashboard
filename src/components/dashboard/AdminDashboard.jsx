@@ -1,3 +1,4 @@
+import axios from "@/api/axios";
 import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card"
 import { useQuery } from "@tanstack/react-query"
 
@@ -9,6 +10,14 @@ export default function AdminDashboard() {
                 (res) => res.json()
             ),
         queryKey: ['comments'],
+    });
+
+    const { data: message } = useQuery({
+        queryFn: () => 
+            fetch('http://localhost:8000/api/mobileapp/ExchangeRate').then(
+                (res) => res.json()
+            ),
+        queryKey: ['message']
     });
     
     // Show Loading message while data is fetching
@@ -33,6 +42,9 @@ export default function AdminDashboard() {
                         </CardContent>
                     </Card>
                 ))}
+
+                {console.log(message)}
+                {console.log(typeof(message))}
                 {/* <Card className="bg-gradient-to-r from-red-500 to-red-300">
                     <CardHeader className="pb-2">
                         <CardTitle className=" text-gray-300 dark:text-gray-400">Registered Users</CardTitle>
