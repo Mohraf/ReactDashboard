@@ -2,6 +2,7 @@ import { Outlet, RootRoute, Router, Route } from "@tanstack/react-router";
 import AdminDashboard from "./components/dashboard/AdminDashboard";
 import Login from "./components/auth/Login";
 import Home from "./components/layout/Home";
+import LeaveType from "./pages/LeaveType";
 
 const rootRoute = new RootRoute({
     component: () => <>
@@ -22,6 +23,12 @@ const loginPageroute = new Route({
     component: Login,
 })
 
-const routeTree = rootRoute.addChildren([landingPageRoute, loginPageroute]);
+const leaveTypePageroute = new Route({
+    path: "/leave-type",
+    getParentRoute: () => rootRoute,
+    component: LeaveType,
+})
+
+const routeTree = rootRoute.addChildren([landingPageRoute, loginPageroute, leaveTypePageroute]);
 
 export const router = new Router({routeTree});

@@ -13,10 +13,13 @@ const Login = () => {
         e.preventDefault();
 
         try{
-            await axios.post('/api/mobileapp/loginClient', {email, password});
+            const response = await axios.post('/api/portal/login', {email, password});
+            localStorage.setItem('token', response.data.token);
             setEmail("");
             setPassword("");
-            navigate("/");
+            navigate({
+                to: '/'
+            });
         } catch(e){
             console.log(e);
         }

@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import AdminDashboard from "../dashboard/AdminDashboard"
 
 
-export default function ContentWrapper() {
+export default function ContentWrapper({children}) {
     // const { data: balance, isLoading, error } = useQuery({
     //     queryFn: () =>
     //         fetch('http://localhost:8000/mobileapp/dashboard/getMpesaBalance').then(
@@ -49,7 +49,7 @@ export default function ContentWrapper() {
                     </div>
                 </div>
             </div>
-            <AdminDashboard />
+            {children}
         </main>
     )
 }

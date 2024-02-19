@@ -1,5 +1,13 @@
 import { HomeIcon, TvIcon, CarIcon, DocumentIcon, SettingsIcon, ShoppingCartIcon, UsersIcon, FreightContainerIcon, LocationPinIcon, TractorIcon, TicketIcon,
 BottleIcon } from "../icons/icons"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
+import { CaretDownIcon } from "@radix-ui/react-icons"
+
 
 export default function SideBar() {
   return (
@@ -26,12 +34,36 @@ export default function SideBar() {
               <span className="text-sm text-white font-medium">Vehicles</span>
             </a>
           </li>
-          <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
+          {/* <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
               <HomeIcon className="h-5 w-5 text-white dark:text-gray-400" />
               <span className="text-sm text-white font-medium">Leave</span>
             </a>
-          </li>
+          </li> */}
+          <Collapsible className="p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
+            <div className="flex items-center justify-between space-x-4">
+              <HomeIcon className="h-5 w-5 text-white dark:text-gray-400" />
+              <span className="text-sm text-white font-medium">Leave</span>
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" size="sm" className="hover:bg-slate-400 dark:hover:bg-gray-500">
+                  <CaretDownIcon className="h-4 w-4 text-white" />
+                  <span className="sr-only">Toggle</span>
+                </Button>
+              </CollapsibleTrigger>
+            </div>
+            <CollapsibleContent className="space-y-2 mx-6">
+              <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm text-white">
+                <a className="flex items-center space-x-4" href="/leave-type">
+                  <span className="text-sm text-white font-medium">Leave Type</span>
+                </a>
+              </div>
+              <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm text-white">
+                <a className="flex items-center space-x-4" href="#">
+                  <span className="text-sm text-white font-medium">Leave Request</span>
+                </a>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
           <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <a className="flex items-center space-x-4" href="#">
               <DocumentIcon className="h-5 w-5 text-white dark:text-gray-400" />
