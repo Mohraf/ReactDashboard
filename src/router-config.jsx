@@ -27,28 +27,22 @@ const checkTokenExpiry = () => {
     return false;
 };
 
-// const authGate = () => {
-//     if (checkTokenExpiry()) {
-//         throw redirect({
-//             to: "/login",
-//         })
-//     }
-// }
+const authGate = async ({location}) => {
+    if(checkTokenExpiry()) {
+        throw redirect({
+            to: "/login",
+            search: {
+                redirect: location.href,
+            }
+        })
+    }
+}
 
 const landingPageRoute = new Route({
     path: "/",
     getParentRoute: () => rootRoute,
     component: Home,
-    beforeLoad: () => {
-        if(checkTokenExpiry()) {
-            throw redirect({
-                to: "/login",
-                search: {
-                    redirect: "/",
-                }
-            })
-        }
-    },
+    beforeLoad: authGate,
 })
 
 const loginPageroute = new Route({
@@ -61,16 +55,7 @@ const leaveTypePageroute = new Route({
     path: "/leave-type",
     getParentRoute: () => rootRoute,
     component: LeaveType,
-    beforeLoad: () => {
-        if(checkTokenExpiry()) {
-            throw redirect({
-                to: "/login",
-                search: {
-                    redirect: "/leave-type",
-                }
-            })
-        }
-    },
+    beforeLoad: authGate,
 })
 
 const routeTree = rootRoute.addChildren([landingPageRoute, loginPageroute, leaveTypePageroute]);
