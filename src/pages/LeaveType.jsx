@@ -24,21 +24,12 @@ const LeaveType = () => {
     queryKey: ['leaveTypes'],
   });
 
-  if (isLoading) {
-    return <h2>Loading...</h2>
-}
-
-  // To handle error
-  if (error) {
-      return <div className="error">Error: error fetching</div>
-  }
-
   return (
     <div className="flex h-screen bg-gray-200 dark:bg-gray-900">
         <SideBar></SideBar>
         <ContentWrapper>
           <h3>Leave Type Page</h3>
-          <div>
+          <div className='shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]'>
             <table className='table-fixed border-separate border-spacing-1 border border-slate-500 mt-4 rounded-sm'>
               <thead>
                 <tr>
@@ -52,7 +43,8 @@ const LeaveType = () => {
                 </tr>
               </thead>
               <tbody>
-                {leaveTypes.mtype.map((leaveType) => (
+                {isLoading ? <h2>Loading...</h2> : error ? <div className="error">Error: error fetching</div> :
+                leaveTypes.mtype.map((leaveType) => (
                   <tr key={leaveType.id}>
                     <td className='border border-slate-600 text-center rounded-sm p-2'>{leaveType.name}</td>
                     <td className='border border-slate-600 rounded-sm p-5'>{leaveType.description}</td>

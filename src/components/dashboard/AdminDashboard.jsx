@@ -31,6 +31,25 @@ export default function AdminDashboard() {
     }
     return (
         <>
+            <div className="flex mt-4 justify-between">
+                <div>
+                    <h1 className="text-3xl font-semibold text-gray-800 dark:text-white">Dashboard</h1>
+                    <h5 className="text-1xl font-semibold text-gray-500 dark:text-white">Welcome back Admin</h5>
+                </div>
+                <div className="flex gap-7" style={{
+                    alignItems: "flex-end",
+                    alignContent: "flex-end"
+                }}>
+                    <div>
+                        <h5 className="text-1xl font-semibold text-gray-500 dark:text-white">MPESA BALANCE</h5>
+                        <h3 className="text-2xl font-semibold text-gray-500 dark:text-white">Ksh</h3>
+                    </div>
+                    <div>
+                        <h5 className="text-1xl font-semibold text-gray-500 dark:text-white">SMS BALANCE</h5>
+                        <h3 className="text-2xl font-semibold text-gray-500 dark:text-white">0 {}</h3>
+                    </div>
+                </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
                 {comments.map((comment) => (
                     <Card className="bg-gradient-to-r from-teal-500 to-teal-300" key={comment.id}>

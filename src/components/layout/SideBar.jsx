@@ -23,7 +23,7 @@ export default function SideBar() {
         </div>
         <ul>
           <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
-            <a className="flex items-center space-x-4" href="#">
+            <a className="flex items-center space-x-4" href="/">
               <TvIcon className="h-5 w-5 text-white dark:text-gray-400" />
               <span className="text-sm text-white font-medium">Dashboard</span>
             </a>
