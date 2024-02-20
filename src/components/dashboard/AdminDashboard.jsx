@@ -12,19 +12,49 @@ export default function AdminDashboard() {
         queryKey: ['comments'],
     });
 
-    const { data: message } = useQuery({
-        queryFn: () => 
-            fetch('http://localhost:8000/api/mobileapp/ExchangeRate').then(
-                (res) => res.json()
-            ),
-        queryKey: ['message']
+    const { data: mpesaBalance, isLoadingMpesaBalance, errorMpesaBalance } = useQuery({
+        queryFn: async () => {
+            const token = localStorage.getItem('token'); // Retrieve token from storage
+            if (!token) {
+                throw new Error('Token not found'); // Handle case where token is not found
+            }
+
+            // Make GET request with token in headers
+            const response = await axios.get('/dashboard/getMpesaBalance', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            return response.data.balance[0].org_account_balance;
+        },
+        queryKey: ['mpesaBalance']
     });
-    
+
+    const { data: smsBalance, isLoadingSmsBalance, errorSmsBalance } = useQuery({
+        queryFn: async () => {
+            const token = localStorage.getItem('token'); // Retrieve token from storage
+            if (!token) {
+                throw new Error('Token not found'); // Handle case where token is not found
+            }
+
+            // Make GET request with token in headers
+            const response = await axios.get('/dashboard/getSmsBalance', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            return response.data.Data[-1].Credits;
+        },
+        queryKey: ['smsBalance']
+    });
+
     // Show Loading message while data is fetching
     if (isLoading) {
         return <h2>Loading...</h2>
     }
-    
+
     // To handle error
     if (error) {
         return <div className="error">Error: error fetching</div>
@@ -42,11 +72,11 @@ export default function AdminDashboard() {
                 }}>
                     <div>
                         <h5 className="text-1xl font-semibold text-gray-500 dark:text-white">MPESA BALANCE</h5>
-                        <h3 className="text-2xl font-semibold text-gray-500 dark:text-white">Ksh</h3>
+                        <h3 className="text-2xl font-semibold text-gray-500 dark:text-white">Ksh {mpesaBalance}</h3>
                     </div>
                     <div>
                         <h5 className="text-1xl font-semibold text-gray-500 dark:text-white">SMS BALANCE</h5>
-                        <h3 className="text-2xl font-semibold text-gray-500 dark:text-white">0 {}</h3>
+                        <h3 className="text-2xl font-semibold text-gray-500 dark:text-white">{ console.log(smsBalance) }</h3>
                     </div>
                 </div>
             </div>
@@ -61,65 +91,6 @@ export default function AdminDashboard() {
                         </CardContent>
                     </Card>
                 ))}
-
-                {console.log(message)}
-                {console.log(typeof(message))}
-                {/* <Card className="bg-gradient-to-r from-red-500 to-red-300">
-                    <CardHeader className="pb-2">
-                        <CardTitle className=" text-gray-300 dark:text-gray-400">Registered Users</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <span className="text-2xl font-bold text-gray-300 dark:text-gray-400">1,245</span>
-                    </CardContent>
-                </Card>
-                <Card className="bg-gradient-to-r from-teal-500 to-teal-300">
-                    <CardHeader className="pb-2">
-                        <CardTitle className=" text-gray-300 dark:text-gray-400">Total Leaves</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <span className="text-2xl font-bold text-gray-300 dark:text-gray-400">1675</span>
-                    </CardContent>
-                </Card>
-                <Card className="bg-gradient-to-r from-orange-500 to-orange-300">
-                    <CardHeader className="pb-2">
-                        <CardTitle className=" text-gray-300 dark:text-gray-400">Total Orders</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <span className="text-2xl font-bold text-gray-300 dark:text-gray-400">645</span>
-                    </CardContent>
-                </Card>
-                <Card className="bg-gradient-to-r from-green-500 to-green-300">
-                    <CardHeader className="pb-2">
-                        <CardTitle className=" text-gray-300 dark:text-gray-400">Total Visitors</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <span className="text-2xl font-bold text-gray-300 dark:text-gray-400">87</span>
-                    </CardContent>
-                </Card>
-                <Card className="bg-gradient-to-r from-green-500 to-green-300 w-36 h-28">
-                    <CardHeader className="pb-2">
-                        <CardTitle className=" text-gray-300 dark:text-gray-400">RSMs</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <span className="text-2xl font-bold text-gray-300 dark:text-gray-400">8</span>
-                    </CardContent>
-                </Card>
-                <Card className="bg-gradient-to-r from-orange-500 to-orange-300 w-36 h-28">
-                    <CardHeader className="pb-2">
-                        <CardTitle className=" text-gray-300 dark:text-gray-400">TSAs</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <span className="text-2xl font-bold text-gray-300 dark:text-gray-400">47</span>
-                    </CardContent>
-                </Card>
-                <Card className="bg-gradient-to-r from-teal-500 to-teal-300 w-36">
-                    <CardHeader className="pb-2">
-                        <CardTitle className=" text-gray-300 dark:text-gray-400">Clients</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <span className="text-2xl font-bold text-gray-300 dark:text-gray-400">4500</span>
-                    </CardContent>
-                </Card> */}
             </div>
         </>
     )
