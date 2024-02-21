@@ -1,4 +1,4 @@
-import * as React from "react"
+import { useState } from "react"
 import SideBar from '@/components/layout/SideBar';
 import ContentWrapper from '@/components/layout/ContentWrapper';
 import {
@@ -175,13 +175,13 @@ export const columns = [
 ]
 
 export default function LeaveRequest() {
-    const [sorting, setSorting] = React.useState([])
-    const [columnFilters, setColumnFilters] = React.useState(
+    const [sorting, setSorting] = useState([])
+    const [columnFilters, setColumnFilters] = useState(
         []
     )
     const [columnVisibility, setColumnVisibility] =
-        React.useState({})
-    const [rowSelection, setRowSelection] = React.useState({})
+        useState({})
+    const [rowSelection, setRowSelection] = useState({})
 
     const { data: leaveRequests, isLoading, error } = useQuery({
         queryFn: async () => {
