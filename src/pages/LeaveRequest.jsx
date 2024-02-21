@@ -240,10 +240,10 @@ export default function LeaveRequest() {
                     <div className="w-full">
                         <div className="flex items-center py-4">
                             <Input
-                                placeholder="Filter leave requests..."
+                                placeholder="Filter by leave type..."
                                 value={(table.getColumn("leave_type")?.getFilterValue()) ?? ""}
                                 onChange={(event) =>
-                                    table.getColumn("email")?.setFilterValue(event.target.value)
+                                    table.getColumn("leave_type")?.setFilterValue(event.target.value)
                                 }
                                 className="max-w-sm"
                             />
