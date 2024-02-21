@@ -58,7 +58,7 @@ export default function SideBar() {
                 </a>
               </div>
               <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm text-white">
-                <a className="flex items-center space-x-4" href="#">
+                <a className="flex items-center space-x-4" href="/leave-request">
                   <span className="text-sm text-white font-medium">Leave Request</span>
                 </a>
               </div>

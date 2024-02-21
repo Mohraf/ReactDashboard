@@ -3,6 +3,7 @@ import AdminDashboard from "./components/dashboard/AdminDashboard";
 import Login from "./components/auth/Login";
 import Home from "./components/layout/Home";
 import LeaveType from "./pages/LeaveType";
+import LeaveRequest from "./pages/LeaveRequest";
 
 import {jwtDecode} from 'jwt-decode';
 
@@ -65,6 +66,22 @@ const leaveTypePageroute = new Route({
     },
 })
 
-const routeTree = rootRoute.addChildren([landingPageRoute, loginPageroute, leaveTypePageroute]);
+const leaveRequestPageRoute = new Route({
+    path: "/leave-request",
+    getParentRoute: () => rootRoute,
+    component: LeaveRequest,
+    beforeLoad: async ({location}) => {
+        if(checkTokenExpiry()) {
+            throw redirect({
+                to: "/login",
+                search: {
+                    redirect: location.href,
+                }
+            })
+        }
+    },
+})
+
+const routeTree = rootRoute.addChildren([landingPageRoute, loginPageroute, leaveTypePageroute, leaveRequestPageRoute]);
 
 export const router = new Router({routeTree});
