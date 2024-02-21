@@ -38,31 +38,6 @@ import {
 import { useQuery } from "@tanstack/react-query"
 import axios from '@/api/axios';
 
-// let data = [
-    // {
-    //     application_date: "2023-08-01 12:06:13",
-    //     days_applied: "1",
-    //     emp_name: "Amos Okello",
-    //     employee_user_id: 66151,
-    //     leave_days_approved: "1",
-    //     leave_end: "2023-07-31",
-    //     leave_start: "2023-07-31",
-    //     leave_type: "Annual leave",
-    //     leave_type_id: 5,
-    // },
-    // {
-    //     application_date: "2023-08-28 05:14:01",
-    //     days_applied: "1",
-    //     emp_name: "Amos Okello",
-    //     employee_user_id: 66151,
-    //     leave_days_approved: "1",
-    //     leave_end: "2023-08-26",
-    //     leave_start: "2023-08-26",
-    //     leave_type: "Annual leave",
-    //     leave_type_id: 5,
-    // },
-// ]
-
 export const columns = [
     {
         id: "select",
@@ -200,8 +175,6 @@ export const columns = [
 ]
 
 export default function LeaveRequest() {
-    // const [userId, setUserId] = React.useState(0)
-    const [data, setData] = React.useState([])
     const [sorting, setSorting] = React.useState([])
     const [columnFilters, setColumnFilters] = React.useState(
         []
@@ -224,7 +197,6 @@ export default function LeaveRequest() {
                     throw new Error('User id not found');
                 }
 
-                console.log(userId); // Check if userId is logged
                 const response = await axios.get(`/leave/valid_leave_details/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
