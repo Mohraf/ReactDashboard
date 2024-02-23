@@ -35,8 +35,13 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import {
+    Dialog,
+    DialogTrigger,
+} from "@/components/ui/dialog"
 import { useQuery } from "@tanstack/react-query"
 import axios from '@/api/axios';
+import { LeaveRequestModal } from "@/components/modals/LeaveRequestModal";
 
 export const columns = [
     {
@@ -234,6 +239,16 @@ export default function LeaveRequest() {
         <div className="flex h-screen bg-gray-200 dark:bg-gray-900">
             <SideBar></SideBar>
             <ContentWrapper>
+                <div className="w-full">
+                    <div className="mt-3">
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <Button variant="outline">Make Leave Request</Button>
+                            </DialogTrigger>
+                            <LeaveRequestModal />
+                        </Dialog>
+                    </div>
+                </div>
                 {isLoading && <p>Loading...</p>}
                 {error && <p>Error: {error.message}</p>}
                 {leaveRequests && (
@@ -275,6 +290,7 @@ export default function LeaveRequest() {
                             </DropdownMenu>
                         </div>
                         <div className="rounded-md border">
+                            <h3 className="mx-1">Here is your leave summary</h3>
                             <Table>
                                 <TableHeader>
                                     {table.getHeaderGroups().map((headerGroup) => (
