@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -39,35 +39,72 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import { toast } from "@/components/ui/use-toast"
 import axios from "@/api/axios"
 import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
 
+let leave_type_ids = []
 
 const FormSchema = z.object({
     leave_type: z
-        .string({
-            required_error: "Please select Leave Type.",
-        }).min(1),
+        .string()
+        .min(1, {message: "Please select Leave Type"})
+        .max(10),
     leave_start: z
-        .date(),
+        .date({
+            required_error: "Leave start date is required.",
+          }),
     leave_end: z
-        .date(),
+        .date({
+            required_error: "Leave end date is required.",
+          }),
+    days_applied: z
+        .string()
+        .min(1),
+    reliever: z
+        .string()
+        .min(1, {message: "Please select Reliever"})
+        .max(10),
+    pending_jobs: z
+        .string()
+        .min(1, {message: "Please list pending jobs"})
+        .max(255, {message: "Exeeded word limit"}),
+    line_manager:
+        z.string()
+        .min(1),
+    approver: z
+        .string()
+        .min(1, {message: "Please select Approver"})
+        .max(10),
+    
 })
 
 export function LeaveRequestModal() {
     const form = useForm({
         resolver: zodResolver(FormSchema),
+        defaultValues: {
+            leave_type: "",
+            line_manager: "",
+            leave_start: "",
+            leave_end: "",
+            days_applied: "0",
+            reliever: "",
+            pending_jobs: "",
+            line_manager: "",
+            approver: "",
+        },
     })
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0); // Set time to midnight
 
-    const [leaveType, setLeaveType] = useState({})
+    const [leaveType, setLeaveType] = useState()
     const [leaveStart, setLeaveStart] = useState(new Date())
     const [leaveEnd, setLeaveEnd] = useState(currentDate)
     const [daysRequested, setDaysRequested] = useState(0)
     const [reliever, setReliever] = useState()
-    const [pendingJobs, setPendingJobs] = useState("")
+    // const [pendingJobs, setPendingJobs] = useState()
+    // const pendingJobsRef = useRef()
     const [lineManager, setLineManager] = useState()
     const [approver, setApprover] = useState()
 
@@ -103,6 +140,8 @@ export function LeaveRequestModal() {
             const types = leaveRequestInfo.type.map((type) => {
                 let id = type.id
                 let name = type.name
+                leave_type_ids.push(String(id))
+                console.log(leave_type_ids)
                 return {
                     id: id,
                     name: name,
@@ -146,6 +185,10 @@ export function LeaveRequestModal() {
         setReliever(selectedValue)
     }
 
+    const handlePendingJobsChange = (e) => {
+        setPendingJobs(e)
+    }
+
     const handleLineManagerChange = (selectedValue) => {
         setLineManager(selectedValue)
     }
@@ -154,8 +197,16 @@ export function LeaveRequestModal() {
         setApprover(selectedValue)
     }
 
-    const onSubmit = () => {
-        console.log("form submit")
+    const onSubmit = (data) => {
+        toast({
+            title: "You submitted the following values:",
+            decription: (
+                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                    <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+                </pre>
+            ),
+        })
+        console.log(data.leave_start)
     }
 
     return (
@@ -169,202 +220,226 @@ export function LeaveRequestModal() {
             <div className="grid gap-4 py-4">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <FormField
-                            control={form.control}
-                            name="leave_type"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Leave Type</FormLabel>
-                                    <Select onValueChange={handleLeaveTypeChange} >
-                                        <FormControl>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select leave type" />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            {leaveTypes.map((leave) => (
-                                                <SelectItem key={leave.id} value={String(leave.id)} defaultValue={String(leave.id)}>{leave.name}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                    <FormDescription>
-                                        You have selected {leaveType}
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="leave_start"
-                            render={({ field }) => (
-                                <FormItem className="flex flex-col mt-2">
-                                    <FormLabel>Leave Start</FormLabel>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
+                        <div className="grid grid-rows-4 grid-flow-col gap-4">
+                            <FormField
+                                control={form.control}
+                                name="leave_type"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Leave Type</FormLabel>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value} >
                                             <FormControl>
-                                                <Button
-                                                    variant={"outline"}
-                                                    className={cn(
-                                                        "pl-3 text-left font-normal",
-                                                        !field.value && "text-muted-foreground"
-                                                    )}
-                                                >
-                                                    {field.value ? (
-                                                        format(field.value, "PPP")
-                                                    ) : (
-                                                        <span>Pick a date</span>
-                                                    )}
-                                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                                </Button>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Select leave type" />
+                                                </SelectTrigger>
                                             </FormControl>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                                mode="single"
-                                                selected={leaveStart}
-                                                onSelect={setLeaveStart}
-                                                initialFocus
-                                            />
-                                        </PopoverContent>
-                                    </Popover>
-                                    <FormDescription>
-                                        Your selected leave starting date is {format(leaveStart, "PPP")}.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="leave_end"
-                            render={({ field }) => (
-                                <FormItem className="flex flex-col mt-2">
-                                    <FormLabel>Leave End</FormLabel>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
+                                            <SelectContent>
+                                                {leaveTypes.map((leave) => (
+                                                    <SelectItem key={leave.id} value={String(leave.id)} >{leave.name}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        <FormDescription>
+                                            You have selected {field.value}
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="leave_start"
+                                render={({ field }) => (
+                                    <FormItem className="flex flex-col mt-2">
+                                        <FormLabel>Leave Start</FormLabel>
+                                        <Popover>
+                                            <PopoverTrigger asChild>
+                                                <FormControl>
+                                                    <Button
+                                                        variant={"outline"}
+                                                        className={cn(
+                                                            "pl-3 text-left font-normal",
+                                                            !field.value && "text-muted-foreground"
+                                                        )}
+                                                    >
+                                                        {field.value ? (
+                                                            format(field.value, "PPP")
+                                                        ) : (
+                                                            <span>Pick a date</span>
+                                                        )}
+                                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                                    </Button>
+                                                </FormControl>
+                                            </PopoverTrigger>
+                                            <PopoverContent className="w-auto p-0" align="start">
+                                                <Calendar
+                                                    mode="single"
+                                                    selected={field.value}
+                                                    onSelect={field.onChange}
+                                                    initialFocus
+                                                />
+                                            </PopoverContent>
+                                        </Popover>
+                                        <FormDescription>
+                                            {/* Your selected leave starting date is {format(field.value, "PPP")}. */}
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="leave_end"
+                                render={({ field }) => (
+                                    <FormItem className="flex flex-col mt-2">
+                                        <FormLabel>Leave End</FormLabel>
+                                        <Popover>
+                                            <PopoverTrigger asChild>
+                                                <FormControl>
+                                                    <Button
+                                                        variant={"outline"}
+                                                        className={cn(
+                                                            "pl-3 text-left font-normal",
+                                                            !field.value && "text-muted-foreground"
+                                                        )}
+                                                    >
+                                                        {field.value ? (
+                                                            format(field.value, "PPP")
+                                                        ) : (
+                                                            <span>Pick a date</span>
+                                                        )}
+                                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                                    </Button>
+                                                </FormControl>
+                                            </PopoverTrigger>
+                                            <PopoverContent className="w-auto p-0" align="start">
+                                                <Calendar
+                                                    mode="single"
+                                                    selected={field.value}
+                                                    onSelect={field.onChange}
+                                                    initialFocus
+                                                />
+                                            </PopoverContent>
+                                        </Popover>
+                                        <FormDescription>
+                                            {/* Your selected leave ending date is {format(field.value, "PPP")}. */}
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="days_applied"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>No. of days</FormLabel>
+                                        <FormControl>
+                                            <Input  placeholder="Days Applied" {...field} disabled />
+                                        </FormControl>
+                                        <FormDescription>You will be on leave for {daysRequested} days.</FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="reliever"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Reliever</FormLabel>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value} >
                                             <FormControl>
-                                                <Button
-                                                    variant={"outline"}
-                                                    className={cn(
-                                                        "pl-3 text-left font-normal",
-                                                        !field.value && "text-muted-foreground"
-                                                    )}
-                                                >
-                                                    {field.value ? (
-                                                        format(field.value, "PPP")
-                                                    ) : (
-                                                        <span>Pick a date</span>
-                                                    )}
-                                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                                </Button>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Select reliever" />
+                                                </SelectTrigger>
                                             </FormControl>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                                mode="single"
-                                                selected={leaveEnd}
-                                                onSelect={setLeaveEnd}
-                                                initialFocus
+                                            <SelectContent>
+                                                {employees.map((reliever) => (
+                                                    <SelectItem key={reliever.id} value={String(reliever.id)} defaultValue={String(reliever.id)}>{reliever.name}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        <FormDescription>
+                                            {/* You have selected {reliever} */}
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="pending_jobs"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Pending Jobs</FormLabel>
+                                        <FormControl>
+                                            <Input 
+                                                type="text" 
+                                                // ref={(element) => {
+                                                //     pendingJobsRef.current = element
+                                                // }}
+                                                // onChangeCapture={e => setPendingJobs(e.currentTarget.value)} 
+                                                placeholder="Pending Jobs" 
+                                                {...field} 
                                             />
-                                        </PopoverContent>
-                                    </Popover>
-                                    <FormDescription>
-                                        Your selected leave ending date is {format(leaveEnd, "PPP")}.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="days_applied"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>No. of days</FormLabel>
-                                    <FormControl>
-                                        <Input value={daysRequested} placeholder="Days Applied" {...field} disabled />
-                                    </FormControl>
-                                    <FormDescription>You will be on leave for {daysRequested} days.</FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="reliever"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Reliever</FormLabel>
-                                    <Select onValueChange={handleRelieverChange} >
-                                        <FormControl>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select reliever" />
-                                            </SelectTrigger>
                                         </FormControl>
-                                        <SelectContent>
-                                            {employees.map((reliever) => (
-                                                <SelectItem key={reliever.id} value={String(reliever.id)} defaultValue={String(reliever.id)}>{reliever.name}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                    <FormDescription>
-                                        You have selected {reliever}
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="line_manager"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Line Manager</FormLabel>
-                                    <Select onValueChange={handleLineManagerChange} >
-                                        <FormControl>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select line manager" />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            {employees.map((lineManager) => (
-                                                <SelectItem key={lineManager.id} value={String(lineManager.id)} defaultValue={String(lineManager.id)}>{lineManager.name}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                    <FormDescription>
-                                        You have selected {lineManager}
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="approver"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Approver</FormLabel>
-                                    <Select onValueChange={handleApproverChange} >
-                                        <FormControl>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select approver" />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            {approvers.map((approver) => (
-                                                <SelectItem key={approver.id} value={String(approver.id)} defaultValue={String(approver.id)}>{approver.name}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                    <FormDescription>
-                                        You have selected {approver}
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                                        {/* <FormDescription>Pending jobs are {field.value} .</FormDescription> */}
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="line_manager"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Line Manager</FormLabel>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value} >
+                                            <FormControl>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Select line manager" />
+                                                </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
+                                                {employees.map((lineManager) => (
+                                                    <SelectItem key={lineManager.id} value={String(lineManager.id)} defaultValue={String(lineManager.id)}>{lineManager.name}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        <FormDescription>
+                                            {/* You have selected {lineManager} */}
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="approver"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Approver</FormLabel>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value} >
+                                            <FormControl>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Select approver" />
+                                                </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
+                                                {approvers.map((approver) => (
+                                                    <SelectItem key={approver.id} value={String(approver.id)} defaultValue={String(approver.id)}>{approver.name}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        <FormDescription>
+                                            You have selected {field.value}
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
                         <DialogFooter>
                             <Button type="submit">Submit</Button>
                         </DialogFooter>
