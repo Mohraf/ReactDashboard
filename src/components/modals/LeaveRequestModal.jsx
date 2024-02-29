@@ -160,21 +160,46 @@ export function LeaveRequestModal() {
 
     const { toast } = useToast()
 
-    const onSubmit = (data) => {
-        toast({
-            title: "You submitted the following values:",
-            decription: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
-        })
+    const onSubmit = async (data) => {
+        const token = localStorage.getItem('token');
         let timeDifference = data.end.getTime() - data.start.getTime();
         let differenceInDays = Math.round(timeDifference / (1000 * 3600 * 24));
         data.daystaken = differenceInDays + 1;
+        
+        // type cast string values to integer
+        data.leavetype = +data.leavetype
+        data.reliever = +data.reliever
+        data.linemanager = +data.linemanager
+        data.approver = +data.approver
         console.log(data)
-    }
+        
+        const response = await axios.post('/leave/addleaverequest', 
+            data,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
 
+        console.log(response.data)
+        if(response.errors) {
+            toast({
+                variant: "destructive",
+                title: "Error submitting values"
+            })
+        } else{
+            toast({
+                title: "Your leave was posted successfully!",
+                decription: (
+                    <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                        <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+                    </pre>
+                ),
+            })
+        }
+    }
+    
     return (
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
