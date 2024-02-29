@@ -39,12 +39,12 @@ export default function SideBar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56 bg-gradient-to-b from-cyan-950 to-slate-700 dark:from-gray-800 dark:to-gray-700hover:bg-slate-700 dark:hover:bg-gray-700">
                 <DropdownMenuItem className=" text-white dark:text-gray-400">
-                  <a className="flex items-center space-x-4" href="/leave-type">
+                  <a className="w-56 flex items-center space-x-4" href="/leave-type">
                     <span>Leave Type</span>
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem className=" text-white dark:text-gray-400">
-                  <a className="flex items-center space-x-4" href="/leave-request">
+                  <a className="w-56 flex items-center space-x-4" href="/leave-request">
                     <span>Leave Request</span>
                   </a>
                 </DropdownMenuItem>
