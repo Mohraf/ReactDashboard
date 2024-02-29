@@ -4,24 +4,6 @@ import { Toaster } from "../ui/toaster"
 
 
 export default function ContentWrapper({children}) {
-    // const { data: balance, isLoading, error } = useQuery({
-    //     queryFn: () =>
-    //         fetch('http://localhost:8000/mobileapp/dashboard/getMpesaBalance').then(
-    //             (res) => res.json()
-    //         ),
-    //     queryKey: ['balance'],
-    // });
-
-    // // Show Loading message while data is fetching
-    // if (isLoading) {
-    //     return <h2>Loading...</h2>
-    // }
-
-    // // To handle error
-    // if (error) {
-    //     return <div className="error">Error: error fetching</div>
-    // }
-
     return (
         <main className="flex-1 p-6" style={{
             marginLeft: "16rem", // Adjust this value to match the width of your sidebar
