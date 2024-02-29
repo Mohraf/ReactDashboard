@@ -39,59 +39,60 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import { toast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast"
 import axios from "@/api/axios"
 import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
 
-let leave_type_ids = []
 
 const FormSchema = z.object({
-    leave_type: z
+    leavetype: z
         .string()
         .min(1, {message: "Please select Leave Type"})
         .max(10),
-    leave_start: z
+    start: z
         .date({
             required_error: "Leave start date is required.",
           }),
-    leave_end: z
+    end: z
         .date({
             required_error: "Leave end date is required.",
           }),
-    days_applied: z
+    daystaken: z
         .string()
         .min(1),
     reliever: z
         .string()
         .min(1, {message: "Please select Reliever"})
         .max(10),
-    pending_jobs: z
+    pendingjobs: z
         .string()
         .min(1, {message: "Please list pending jobs"})
         .max(255, {message: "Exeeded word limit"}),
-    line_manager:
-        z.string()
-        .min(1),
+    linemanager: z
+        .string()
+        .min(1, {message: "Please select Line Manager"})
+        .max(10),
     approver: z
         .string()
         .min(1, {message: "Please select Approver"})
         .max(10),
-    
+}).refine((data) => data.end >= data.start, {
+    message: "End date cannot be earlier than start date.",
+    path: ["end"]
 })
 
 export function LeaveRequestModal() {
     const form = useForm({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            leave_type: "",
-            line_manager: "",
-            leave_start: "",
-            leave_end: "",
-            days_applied: "0",
+            leavetype: "",
+            start: "",
+            end: "",
+            daystaken: "0",
             reliever: "",
-            pending_jobs: "",
-            line_manager: "",
+            pendingjobs: "",
+            linemanager: "",
             approver: "",
         },
     })
@@ -103,8 +104,6 @@ export function LeaveRequestModal() {
     const [leaveEnd, setLeaveEnd] = useState(currentDate)
     const [daysRequested, setDaysRequested] = useState(0)
     const [reliever, setReliever] = useState()
-    // const [pendingJobs, setPendingJobs] = useState()
-    // const pendingJobsRef = useRef()
     const [lineManager, setLineManager] = useState()
     const [approver, setApprover] = useState()
 
@@ -140,8 +139,6 @@ export function LeaveRequestModal() {
             const types = leaveRequestInfo.type.map((type) => {
                 let id = type.id
                 let name = type.name
-                leave_type_ids.push(String(id))
-                console.log(leave_type_ids)
                 return {
                     id: id,
                     name: name,
@@ -171,11 +168,11 @@ export function LeaveRequestModal() {
         }
     }, [leaveRequestInfo])
 
-    useEffect(() => {
-        let timeDifference = leaveEnd.getTime() - leaveStart.getTime();
-        let differenceInDays = Math.round(timeDifference / (1000 * 3600 * 24));
-        setDaysRequested(differenceInDays + 1);
-    }, [leaveStart, leaveEnd])
+    // useEffect(() => {
+    //     let timeDifference = leaveEnd.getTime() - leaveStart.getTime();
+    //     let differenceInDays = Math.round(timeDifference / (1000 * 3600 * 24));
+    //     setDaysRequested(differenceInDays + 1);
+    // }, [leaveStart, leaveEnd])
 
     const handleLeaveTypeChange = (selectedValue) => {
         setLeaveType(selectedValue)
@@ -197,6 +194,8 @@ export function LeaveRequestModal() {
         setApprover(selectedValue)
     }
 
+    const { toast } = useToast()
+
     const onSubmit = (data) => {
         toast({
             title: "You submitted the following values:",
@@ -206,7 +205,10 @@ export function LeaveRequestModal() {
                 </pre>
             ),
         })
-        console.log(data.leave_start)
+        let timeDifference = data.end.getTime() - data.start.getTime();
+        let differenceInDays = Math.round(timeDifference / (1000 * 3600 * 24));
+        data.daystaken = differenceInDays + 1;
+        console.log(data)
     }
 
     return (
@@ -223,7 +225,7 @@ export function LeaveRequestModal() {
                         <div className="grid grid-rows-4 grid-flow-col gap-4">
                             <FormField
                                 control={form.control}
-                                name="leave_type"
+                                name="leavetype"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Leave Type</FormLabel>
@@ -248,7 +250,7 @@ export function LeaveRequestModal() {
                             />
                             <FormField
                                 control={form.control}
-                                name="leave_start"
+                                name="start"
                                 render={({ field }) => (
                                     <FormItem className="flex flex-col mt-2">
                                         <FormLabel>Leave Start</FormLabel>
@@ -289,7 +291,7 @@ export function LeaveRequestModal() {
                             />
                             <FormField
                                 control={form.control}
-                                name="leave_end"
+                                name="end"
                                 render={({ field }) => (
                                     <FormItem className="flex flex-col mt-2">
                                         <FormLabel>Leave End</FormLabel>
@@ -330,7 +332,7 @@ export function LeaveRequestModal() {
                             />
                             <FormField
                                 control={form.control}
-                                name="days_applied"
+                                name="daystaken"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>No. of days</FormLabel>
@@ -369,7 +371,7 @@ export function LeaveRequestModal() {
                             />
                             <FormField
                                 control={form.control}
-                                name="pending_jobs"
+                                name="pendingjobs"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Pending Jobs</FormLabel>
@@ -391,7 +393,7 @@ export function LeaveRequestModal() {
                             />
                             <FormField
                                 control={form.control}
-                                name="line_manager"
+                                name="linemanager"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Line Manager</FormLabel>
