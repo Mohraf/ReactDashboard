@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import AdminDashboard from "../dashboard/AdminDashboard"
+import { Toaster } from "../ui/toaster"
 
 
 export default function ContentWrapper({children}) {
@@ -32,6 +33,7 @@ export default function ContentWrapper({children}) {
             </div>
             
             {children}
+            <Toaster />
         </main>
     )
 }

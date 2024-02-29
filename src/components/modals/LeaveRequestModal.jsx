@@ -96,16 +96,6 @@ export function LeaveRequestModal() {
             approver: "",
         },
     })
-    const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0); // Set time to midnight
-
-    const [leaveType, setLeaveType] = useState()
-    const [leaveStart, setLeaveStart] = useState(new Date())
-    const [leaveEnd, setLeaveEnd] = useState(currentDate)
-    const [daysRequested, setDaysRequested] = useState(0)
-    const [reliever, setReliever] = useState()
-    const [lineManager, setLineManager] = useState()
-    const [approver, setApprover] = useState()
 
     const [leaveTypes, setLeaveTypes] = useState([])
     const [employees, setEmployees] = useState([])
@@ -168,32 +158,6 @@ export function LeaveRequestModal() {
         }
     }, [leaveRequestInfo])
 
-    // useEffect(() => {
-    //     let timeDifference = leaveEnd.getTime() - leaveStart.getTime();
-    //     let differenceInDays = Math.round(timeDifference / (1000 * 3600 * 24));
-    //     setDaysRequested(differenceInDays + 1);
-    // }, [leaveStart, leaveEnd])
-
-    const handleLeaveTypeChange = (selectedValue) => {
-        setLeaveType(selectedValue)
-    }
-
-    const handleRelieverChange = (selectedValue) => {
-        setReliever(selectedValue)
-    }
-
-    const handlePendingJobsChange = (e) => {
-        setPendingJobs(e)
-    }
-
-    const handleLineManagerChange = (selectedValue) => {
-        setLineManager(selectedValue)
-    }
-
-    const handleApproverChange = (selectedValue) => {
-        setApprover(selectedValue)
-    }
-
     const { toast } = useToast()
 
     const onSubmit = (data) => {
@@ -242,7 +206,7 @@ export function LeaveRequestModal() {
                                             </SelectContent>
                                         </Select>
                                         <FormDescription>
-                                            You have selected {field.value}
+                                            
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
@@ -283,7 +247,7 @@ export function LeaveRequestModal() {
                                             </PopoverContent>
                                         </Popover>
                                         <FormDescription>
-                                            {/* Your selected leave starting date is {format(field.value, "PPP")}. */}
+                                            
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
@@ -324,7 +288,7 @@ export function LeaveRequestModal() {
                                             </PopoverContent>
                                         </Popover>
                                         <FormDescription>
-                                            {/* Your selected leave ending date is {format(field.value, "PPP")}. */}
+                                            
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
@@ -339,7 +303,7 @@ export function LeaveRequestModal() {
                                         <FormControl>
                                             <Input  placeholder="Days Applied" {...field} disabled />
                                         </FormControl>
-                                        <FormDescription>You will be on leave for {daysRequested} days.</FormDescription>
+                                        <FormDescription>.</FormDescription>
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -363,7 +327,7 @@ export function LeaveRequestModal() {
                                             </SelectContent>
                                         </Select>
                                         <FormDescription>
-                                            {/* You have selected {reliever} */}
+                                           
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
@@ -386,7 +350,7 @@ export function LeaveRequestModal() {
                                                 {...field} 
                                             />
                                         </FormControl>
-                                        {/* <FormDescription>Pending jobs are {field.value} .</FormDescription> */}
+                                        <FormDescription></FormDescription>
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -410,7 +374,7 @@ export function LeaveRequestModal() {
                                             </SelectContent>
                                         </Select>
                                         <FormDescription>
-                                            {/* You have selected {lineManager} */}
+                                           
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
@@ -435,7 +399,7 @@ export function LeaveRequestModal() {
                                             </SelectContent>
                                         </Select>
                                         <FormDescription>
-                                            You have selected {field.value}
+                                            
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
