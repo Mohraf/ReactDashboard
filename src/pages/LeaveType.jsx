@@ -69,7 +69,7 @@ export const columns = [
     ),
   },
   {
-    accessorKey: "Description",
+    accessorKey: "description",
     header: "Description",
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("description")}</div>
@@ -167,6 +167,14 @@ export const columns = [
 ]
 
 const LeaveType = () => {
+  const [sorting, setSorting] = useState([])
+  const [columnFilters, setColumnFilters] = useState(
+    []
+  )
+  const [columnVisibility, setColumnVisibility] =
+    useState({})
+  const [rowSelection, setRowSelection] = useState({})
+
   const { data: leaveTypes, isLoading, error } = useQuery({
     queryFn: async () => {
       const token = localStorage.getItem('token'); // Retrieve token from storage
@@ -181,47 +189,158 @@ const LeaveType = () => {
         },
       });
 
-      return response.data;
+      return response.data.mtype;
     },
     queryKey: ['leaveTypes'],
   });
 
+  const table = useReactTable({
+    data: leaveTypes,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+    },
+  })
+
   return (
-    <div className="flex h-screen bg-gray-200 dark:bg-gray-900">
-      <SideBar></SideBar>
-      <ContentWrapper>
-        <h3>Leave Type Page</h3>
-        <div className='shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]'>
-          <table className='table-fixed border-separate border-spacing-1 border border-slate-500 mt-4 rounded-sm'>
-            <thead>
-              <tr>
-                <th className='border border-slate-600'>Name</th>
-                <th className='border border-slate-600'>Description</th>
-                <th className='border border-slate-600'>Created By</th>
-                <th className='border border-slate-600'>Date Created</th>
-                <th className='border border-slate-600'>Date Modified</th>
-                <th className='border border-slate-600'>Modified By</th>
-                <th className='border border-slate-600'>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {isLoading ? <h2>Loading...</h2> : error ? <div className="error">Error: error fetching</div> :
-                leaveTypes.mtype.map((leaveType) => (
-                  <tr key={leaveType.id}>
-                    <td className='border border-slate-600 text-center rounded-sm p-2'>{leaveType.name}</td>
-                    <td className='border border-slate-600 rounded-sm p-5'>{leaveType.description}</td>
-                    <td className='border border-slate-600 text-center rounded-sm'>{leaveType.created_by}</td>
-                    <td className='border border-slate-600 text-center rounded-sm'>{leaveType.date_created}</td>
-                    <td className='border border-slate-600 text-center rounded-sm'>{leaveType.date_modified}</td>
-                    <td className='border border-slate-600 text-center rounded-sm'>{leaveType.modified_by}</td>
-                    <td className='border border-slate-600 text-center rounded-sm p-2'>Action</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      </ContentWrapper>
-    </div>
+    <>
+
+      <div className="flex h-screen bg-gray-200 dark:bg-gray-900">
+        <SideBar></SideBar>
+        <ContentWrapper>
+          <h3>Leave Type Page</h3>
+
+          {isLoading && <p>Loading...</p>}
+          {error && <p>Error: {error.message}</p>}
+          {leaveTypes && (
+            <div className="w-full">
+              <div className="flex items-center py-4">
+                <Input
+                  placeholder="Filter by leave type..."
+                  value={(table.getColumn("name")?.getFilterValue()) ?? ""}
+                  onChange={(event) =>
+                    table.getColumn("name")?.setFilterValue(event.target.value)
+                  }
+                  className="max-w-sm"
+                />
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="ml-auto">
+                      Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    {table
+                      .getAllColumns()
+                      .filter((column) => column.getCanHide())
+                      .map((column) => {
+                        return (
+                          <DropdownMenuCheckboxItem
+                            key={column.id}
+                            className="capitalize"
+                            checked={column.getIsVisible()}
+                            onCheckedChange={(value) =>
+                              column.toggleVisibility(!!value)
+                            }
+                          >
+                            {column.id}
+                          </DropdownMenuCheckboxItem>
+                        )
+                      })}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+              <div className="rounded-md border">
+                <h3 className="mx-1">Leave Types</h3>
+                <Table>
+                  <TableHeader>
+                    {table.getHeaderGroups().map((headerGroup) => (
+                      <TableRow key={headerGroup.id}>
+                        {headerGroup.headers.map((header) => {
+                          return (
+                            <TableHead key={header.id}>
+                              {header.isPlaceholder
+                                ? null
+                                : flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
+                            </TableHead>
+                          )
+                        })}
+                      </TableRow>
+                    ))}
+                  </TableHeader>
+                  <TableBody>
+                    {table.getRowModel().rows?.length ? (
+                      table.getRowModel().rows.map((row) => (
+                        <TableRow
+                          key={row.id}
+                          data-state={row.getIsSelected() && "selected"}
+                        >
+                          {row.getVisibleCells().map((cell) => (
+                            <TableCell key={cell.id}>
+                              {flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext()
+                              )}
+                            </TableCell>
+                          ))}
+                        </TableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <TableCell
+                          colSpan={columns.length}
+                          className="h-24 text-center"
+                        >
+                          No results.
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+              <div className="flex items-center justify-end space-x-2 py-4">
+                <div className="flex-1 text-sm text-muted-foreground">
+                  {table.getFilteredSelectedRowModel().rows.length} of{" "}
+                  {table.getFilteredRowModel().rows.length} row(s) selected.
+                </div>
+                <div className="space-x-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                  >
+                    Previous
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                  >
+                    Next
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+        </ContentWrapper>
+      </div>
+    </>
   )
 }
 
