@@ -63,16 +63,31 @@ export const columns = [
     },
     {
         accessorKey: "application_date",
-        header: "Date",
-        cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("application_date")}</div>
-        ),
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Date
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => <div className="capitalize">{row.getValue("application_date")}</div>,
     },
     {
         accessorKey: "user_fname",
-        header: "Employee names",
+        header: "First Name",
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("user_fname")} </div>
+            <div className="capitalize">{row.getValue("user_fname")}</div>
+        ),
+    },
+    {
+        accessorKey: "user_lname",
+        header: "Last Name",
+        cell: ({ row }) => (
+            <div className="capitalize">{row.getValue("user_lname")}</div>
         ),
     },
     {
@@ -88,10 +103,10 @@ export const columns = [
                 </Button>
             )
         },
-        cell: ({ row }) => <div className="lowercase">{row.getValue("department_name")}</div>,
+        cell: ({ row }) => <div className="capitalize">{row.getValue("department_name")}</div>,
     },
     {
-        accessorKey: "designation",
+        accessorKey: "position_name",
         header: ({ column }) => {
             return (
                 <Button
@@ -103,7 +118,7 @@ export const columns = [
                 </Button>
             )
         },
-        cell: ({ row }) => <div className="lowercase">{row.getValue("designation")}</div>,
+        cell: ({ row }) => <div className="capitalize">{row.getValue("position_name")}</div>,
     },
     {
         accessorKey: "leave_type_name",
@@ -118,7 +133,7 @@ export const columns = [
                 </Button>
             )
         },
-        cell: ({ row }) => <div className="lowercase">{row.getValue("leave_type_name")}</div>,
+        cell: ({ row }) => <div className="capitalize">{row.getValue("leave_type_name")}</div>,
     },
     {
         accessorKey: "leave_start",
@@ -151,6 +166,66 @@ export const columns = [
         cell: ({ row }) => <div className="lowercase">{row.getValue("leave_end")}</div>,
     },
     {
+        accessorKey: "days_applied",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    No of days
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => <div className="lowercase">{row.getValue("days_applied")}</div>,
+    },
+    {
+        accessorKey: "approval_status",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Line Manager
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => <div className="capitalize">{row.getValue("approval_status")}</div>,
+    },
+    {
+        accessorKey: "approval_notes",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Line Manager Notes
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => <div className="lowercase">{row.getValue("approval_notes")}</div>,
+    },
+    {
+        accessorKey: "approver_fname",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Line Manager Names
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => <div className="capitalize">{row.getValue("approver_fname")}</div>,
+    },
+    {
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
@@ -169,11 +244,10 @@ export const columns = [
                         <DropdownMenuItem
                             onClick={() => navigator.clipboard.writeText(payment.id)}
                         >
-                            Copy payment ID
+                            Approve
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
+                        <DropdownMenuItem>Decline</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )
@@ -244,7 +318,7 @@ const LeaveApproval = () => {
                         <div className="w-full">
                             <div className="flex items-center py-4">
                                 <Input
-                                    placeholder="Filter by leave type..."
+                                    placeholder="Filter by Employee first name..."
                                     value={(table.getColumn("user_fname")?.getFilterValue()) ?? ""}
                                     onChange={(event) =>
                                         table.getColumn("user_fname")?.setFilterValue(event.target.value)
