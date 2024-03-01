@@ -4,9 +4,9 @@ import Login from "./components/auth/Login";
 import Home from "./components/layout/Home";
 import LeaveType from "./pages/LeaveType";
 import LeaveRequest from "./pages/LeaveRequest";
+import LeaveApproval from "./pages/LeaveApproval";
 
 import {jwtDecode} from 'jwt-decode';
-import LeaveApproval from "./pages/LeaveApproval";
 
 const rootRoute = new RootRoute({
     component: () => <>
@@ -105,7 +105,8 @@ const routeTree = rootRoute
                         landingPageRoute, 
                         loginPageroute, 
                         leaveTypePageroute, 
-                        leaveRequestPageRoute
+                        leaveRequestPageRoute,
+                        leaveApprovalPageRoute
                     ]
                 );
 
