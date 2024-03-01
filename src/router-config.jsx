@@ -6,6 +6,7 @@ import LeaveType from "./pages/LeaveType";
 import LeaveRequest from "./pages/LeaveRequest";
 
 import {jwtDecode} from 'jwt-decode';
+import LeaveApproval from "./pages/LeaveApproval";
 
 const rootRoute = new RootRoute({
     component: () => <>
@@ -82,6 +83,30 @@ const leaveRequestPageRoute = new Route({
     },
 })
 
-const routeTree = rootRoute.addChildren([landingPageRoute, loginPageroute, leaveTypePageroute, leaveRequestPageRoute]);
+const leaveApprovalPageRoute = new Route({
+    path: "/leave-approval",
+    getParentRoute: () => rootRoute,
+    component: LeaveApproval,
+    beforeLoad: async ({location}) => {
+        if(checkTokenExpiry()) {
+            throw redirect({
+                to: "/login",
+                search: {
+                    redirect: location.href,
+                }
+            })
+        }
+    },
+})
+
+const routeTree = rootRoute
+                .addChildren(
+                    [
+                        landingPageRoute, 
+                        loginPageroute, 
+                        leaveTypePageroute, 
+                        leaveRequestPageRoute
+                    ]
+                );
 
 export const router = new Router({routeTree});
