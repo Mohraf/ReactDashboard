@@ -31,8 +31,8 @@ export default function SideBar() {
           </li>
           <li className="flex items-center p-6 hover:bg-slate-700 dark:hover:bg-gray-700">
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center space-x-4" asChild>
-                <Button variant="outline" className="w-56 bg-gradient-to-b from-cyan-950 to-slate-700 dark:from-gray-800 dark:to-gray-700hover:bg-slate-700 dark:hover:bg-gray-700">                  
+              <DropdownMenuTrigger className="shadow-2xl shadow-slate-700 flex items-center space-x-4" asChild>
+                <Button className="w-56 bg-gradient-to-b from-cyan-950 to-slate-700 dark:from-gray-800 dark:to-gray-700hover:bg-slate-700 dark:hover:bg-gray-700">                  
                   <HomeIcon className="h-5 w-5 text-white dark:text-gray-400" />
                   <span className="text-sm text-white font-medium">Leave</span>
                 </Button>
