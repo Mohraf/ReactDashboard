@@ -10,6 +10,7 @@ import {jwtDecode} from 'jwt-decode';
 import Employees from "./pages/marketing/Employees";
 import Clients from "./pages/marketing/Clients";
 import Farmers from "./pages/marketing/Farmers";
+import Distributors from "./pages/marketing/Distributors";
 
 const rootRoute = new RootRoute({
     component: () => <>
@@ -150,6 +151,21 @@ const marketingFarmersPageRoute = new Route({
     },
 })
 
+const marketingDistributorsPageRoute = new Route({
+    path: "/marketing-distributors",
+    getParentRoute: () => rootRoute,
+    component: Distributors,
+    beforeLoad: async ({location}) => {
+        if(checkTokenExpiry()) {
+            throw redirect({
+                to: "/login",
+                search: {
+                    redirect: location.href,
+                }
+            })
+        }
+    },
+})
 
 const routeTree = rootRoute
                 .addChildren(
@@ -161,7 +177,8 @@ const routeTree = rootRoute
                         leaveApprovalPageRoute,
                         marketingEmployeesPageRoute,
                         marketingClientsPageRoute,
-                        marketingFarmersPageRoute
+                        marketingFarmersPageRoute,
+                        marketingDistributorsPageRoute
                     ]
                 );
 
