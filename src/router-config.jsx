@@ -7,6 +7,7 @@ import LeaveRequest from "./pages/LeaveRequest";
 import LeaveApproval from "./pages/LeaveApproval";
 
 import {jwtDecode} from 'jwt-decode';
+import Employees from "./pages/marketing/Employees";
 
 const rootRoute = new RootRoute({
     component: () => <>
@@ -99,6 +100,22 @@ const leaveApprovalPageRoute = new Route({
     },
 })
 
+const marketingEmployeesPageRoute = new Route({
+    path: "/marketing-employees",
+    getParentRoute: () => rootRoute,
+    component: Employees,
+    beforeLoad: async ({location}) => {
+        if(checkTokenExpiry()) {
+            throw redirect({
+                to: "/login",
+                search: {
+                    redirect: location.href,
+                }
+            })
+        }
+    },
+})
+
 const routeTree = rootRoute
                 .addChildren(
                     [
@@ -106,7 +123,8 @@ const routeTree = rootRoute
                         loginPageroute, 
                         leaveTypePageroute, 
                         leaveRequestPageRoute,
-                        leaveApprovalPageRoute
+                        leaveApprovalPageRoute,
+                        marketingEmployeesPageRoute
                     ]
                 );
 
