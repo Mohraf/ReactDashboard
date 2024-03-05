@@ -2,9 +2,9 @@ import { Outlet, RootRoute, Router, Route, redirect } from "@tanstack/react-rout
 import AdminDashboard from "./components/dashboard/AdminDashboard";
 import Login from "./components/auth/Login";
 import Home from "./components/layout/Home";
-import LeaveType from "./pages/LeaveType";
-import LeaveRequest from "./pages/LeaveRequest";
-import LeaveApproval from "./pages/LeaveApproval";
+import LeaveType from "./pages/leave/LeaveType";
+import LeaveRequest from "./pages/leave/LeaveRequest";
+import LeaveApproval from "./pages/leave/LeaveApproval";
 
 import {jwtDecode} from 'jwt-decode';
 import Employees from "./pages/marketing/Employees";
