@@ -197,7 +197,7 @@ export default function SideBar() {
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem className=" text-white dark:text-gray-400">
-                  <a className="w-56 flex items-center space-x-4" href="/leave-request">
+                  <a className="w-56 flex items-center space-x-4" href="/marketing-clients">
                     <span>Clients</span>
                   </a>
                 </DropdownMenuItem>
