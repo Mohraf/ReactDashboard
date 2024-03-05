@@ -11,6 +11,7 @@ import Employees from "./pages/marketing/Employees";
 import Clients from "./pages/marketing/Clients";
 import Farmers from "./pages/marketing/Farmers";
 import Distributors from "./pages/marketing/Distributors";
+import Stockists from "./pages/marketing/Stockists";
 
 const rootRoute = new RootRoute({
     component: () => <>
@@ -167,6 +168,22 @@ const marketingDistributorsPageRoute = new Route({
     },
 })
 
+const marketingStockistsPageRoute = new Route({
+    path: "/marketing-stockists",
+    getParentRoute: () => rootRoute,
+    component: Stockists,
+    beforeLoad: async ({location}) => {
+        if(checkTokenExpiry()) {
+            throw redirect({
+                to: "/login",
+                search: {
+                    redirect: location.href,
+                }
+            })
+        }
+    },
+})
+
 const routeTree = rootRoute
                 .addChildren(
                     [
@@ -178,7 +195,8 @@ const routeTree = rootRoute
                         marketingEmployeesPageRoute,
                         marketingClientsPageRoute,
                         marketingFarmersPageRoute,
-                        marketingDistributorsPageRoute
+                        marketingDistributorsPageRoute,
+                        marketingStockistsPageRoute
                     ]
                 );
 
