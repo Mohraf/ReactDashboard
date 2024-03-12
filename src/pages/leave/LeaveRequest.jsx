@@ -41,7 +41,7 @@ import {
 } from "@/components/ui/dialog"
 import { useQuery } from "@tanstack/react-query"
 import axios from '@/api/axios';
-import { LeaveRequestModal } from "@/components/modals/LeaveRequestModal";
+import { LeaveRequestModal } from "@/components/modals/leave/LeaveRequestModal";
 
 export const columns = [
     {
