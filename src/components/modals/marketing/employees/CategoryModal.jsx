@@ -221,7 +221,7 @@ export function CategoryModal() {
                                         <Select onValueChange={field.onChange} defaultValue={field.value} >
                                             <FormControl>
                                                 <SelectTrigger>
-                                                    <SelectValue placeholder="Select leave type" />
+                                                    <SelectValue placeholder="Select Branch" />
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
@@ -246,7 +246,7 @@ export function CategoryModal() {
                                         <Select onValueChange={field.onChange} defaultValue={field.value} >
                                             <FormControl>
                                                 <SelectTrigger>
-                                                    <SelectValue placeholder="Select leave type" />
+                                                    <SelectValue placeholder="Select Department" />
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
@@ -271,7 +271,7 @@ export function CategoryModal() {
                                         <Select onValueChange={field.onChange} defaultValue={field.value} >
                                             <FormControl>
                                                 <SelectTrigger>
-                                                    <SelectValue placeholder="Select leave type" />
+                                                    <SelectValue placeholder="Select section" />
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
@@ -296,7 +296,7 @@ export function CategoryModal() {
                                         <Select onValueChange={field.onChange} defaultValue={field.value} >
                                             <FormControl>
                                                 <SelectTrigger>
-                                                    <SelectValue placeholder="Select leave type" />
+                                                    <SelectValue placeholder="Select position" />
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
